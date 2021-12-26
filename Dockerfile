@@ -57,9 +57,14 @@ ENV PATH="/root/.local/bin:${PATH}"
 RUN python3 -m pip install --user pipx
 RUN pipx install gdbgui
  
-RUN echo "ProxyPass \"/google\" \"http://google.com\"" >> /usr/local/apache2/conf/httpd.conf
+# Dont touch it please, The MaxClients setting determines the number of Apache processes, WE WANT ONLY ONE FOR DEBUGGING
 RUN echo "MaxClients 1" >> /usr/local/apache2/conf/httpd.conf
+ 
+ 
+# Config your apache config here!!!!!!
 RUN sed -i -r 's/#LoadModule proxy_module/LoadModule proxy_module/' /usr/local/apache2/conf/httpd.conf
 RUN sed -i -r 's/#LoadModule proxy_http_module/LoadModule proxy_http_module/' /usr/local/apache2/conf/httpd.conf
+RUN echo "ProxyPass \"/google\" \"http://google.com\"" >> /usr/local/apache2/conf/httpd.conf
+ 
  
 CMD  [ "gdbgui", "--host", "0.0.0.0", "--port", "6060"]
