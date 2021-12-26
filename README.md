@@ -16,3 +16,4 @@ Commands 4 me
 * docker run -d --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -p 0.0.0.0:80:80 -p 0.0.0.0:6060:6060 -p 0.0.0.0:1337:1337 apachecompile
 * docker exec -it $(docker ps -q) /bin/sh
 * Binary location: /usr/local/apache2/bin/httpd -X -D FOREGROUND
+* A Great repository contains examples for apache mods: https://github.com/pgajdos/apache-rex
